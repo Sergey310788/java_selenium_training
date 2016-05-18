@@ -5,7 +5,7 @@ import org.openqa.selenium.*;
 public class Login2Test extends TestNgTestBase {
 
     @Test
-    public void Login2Test() {
+    public void login2Test() {
         driver.get("http://localhost/php4dvd/");
         driver.findElement(By.id("username")).click();
         driver.findElement(By.id("username")).clear();

@@ -1,2 +1,3 @@
 browserName=firefox
 nativeEvents=false
+platform=win7

@@ -1,3 +1,3 @@
 browserName=chrome
-version=
-platform=xp
+browserVersion=50.0
+platform=win7

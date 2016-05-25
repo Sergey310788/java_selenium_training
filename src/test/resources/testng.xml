@@ -5,5 +5,16 @@
     <classes>
       <class name="ru.stqa.selenium.LoginTest"/>
     </classes>
-  </test>  
+  </test>
+  <test name="AddMovieTest">
+    <classes>
+      <class name="ru.stqa.selenium.AddMovieTest"/>
+    </classes>
+  </test>
+  <test name="DeleteMovieTest">
+    <classes>
+      <class name="ru.stqa.selenium.DeleteMovieTest"/>
+    </classes>
+  </test>
+  DeleteMovieTest
 </suite>

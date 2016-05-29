@@ -16,31 +16,43 @@ public class AddMovieTest extends TestNgTestBase{
     LoginTest.testLogin(driver);
 
     //add movie
+    String movieTitle = "Выживший";
+    String movieYear = "2015";
+    List<WebElement> moviesBefore = null;
+    List<WebElement> moviesAfter = null;
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     WebDriverWait wait = new WebDriverWait(driver,30);
-    List<WebElement> moviesBefore = driver.findElements(By.xpath("//*[@class='movie_box']"));
+    wait.until(ExpectedConditions. //wait for home page to load
+            presenceOfAllElementsLocatedBy(
+                  By.xpath("//div[@class='title']")));
+    moviesBefore = driver.findElements(By.xpath("//div[@class='title']"));
     driver.findElement(By.cssSelector("img[alt=\"Add movie\"]")).click();
     driver.findElement(By.name("name")).clear();
-    driver.findElement(By.name("name")).sendKeys("Выживший");
+    driver.findElement(By.name("name")).sendKeys(movieTitle);
     driver.findElement(By.name("year")).clear();
-    driver.findElement(By.name("year")).sendKeys("2015");
+    driver.findElement(By.name("year")).sendKeys(movieYear);
     driver.findElement(By.id("submit")).click();
     driver.findElement(By.linkText("Home")).click();
 
     //check movies counter
     wait.until(ExpectedConditions. //wait for home page to load
-            presenceOfElementLocated(By.
-                    xpath("//*[@class='searchbox']")));
-    List<WebElement> moviesAfter = driver.findElements(By.xpath("//*[@class='movie_box']"));
+            presenceOfAllElementsLocatedBy(
+                    By.xpath("//div[@class='title']")));
+    moviesAfter = driver.findElements(By.xpath("//div[@class='title']"));
     if (moviesAfter.size() != moviesBefore.size()+1)
       throw new Error("Фильм не добавлен");
   }
   @Test
   public void testAddMovieNegative() throws Exception {
+    List<WebElement> moviesBefore = null;
+    List<WebElement> moviesAfter = null;
     //no "name" parameter
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     WebDriverWait wait = new WebDriverWait(driver,30);
-    List<WebElement> moviesBefore = driver.findElements(By.xpath("//*[@class='movie_box']"));
+    wait.until(ExpectedConditions. //wait for home page to load
+            presenceOfAllElementsLocatedBy(
+                      By.xpath("//div[@class='title']")));
+    moviesBefore = driver.findElements(By.xpath("//div[@class='title']"));
     driver.findElement(By.cssSelector("img[alt=\"Add movie\"]")).click();
     driver.findElement(By.name("name")).clear();
     driver.findElement(By.name("name")).sendKeys("");
@@ -65,9 +77,9 @@ public class AddMovieTest extends TestNgTestBase{
 
     //check movies counter
     wait.until(ExpectedConditions. //wait for home page to load
-            presenceOfElementLocated(By.
-                    xpath("//*[@class='searchbox']")));
-    List<WebElement> moviesAfter = driver.findElements(By.xpath("//*[@class='movie_box']"));
+            presenceOfAllElementsLocatedBy(
+            By.xpath("//div[@class='title']")));
+    moviesAfter = driver.findElements(By.xpath("//div[@class='title']"));
     if (moviesAfter.size() > moviesBefore.size())
       throw new Error("Ошибочное добавление фильма");
   }

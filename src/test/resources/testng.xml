@@ -16,5 +16,9 @@
       <class name="ru.stqa.selenium.DeleteMovieTest"/>
     </classes>
   </test>
-  DeleteMovieTest
+  <test name="SearchMovieTest">
+    <classes>
+      <class name="ru.stqa.selenium.SearchMovieTest"/>
+    </classes>
+  </test>
 </suite>

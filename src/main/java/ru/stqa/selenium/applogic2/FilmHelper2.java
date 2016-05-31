@@ -2,8 +2,12 @@ package ru.stqa.selenium.applogic2;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import ru.stqa.selenium.applogic.FilmHelper;
+import ru.stqa.selenium.applogic.NavigationHelper;
 import ru.stqa.selenium.model.Film;
+import ru.stqa.selenium.pages.AddMovieFormPage;
 
 public class FilmHelper2 extends DriverBasedHelper implements FilmHelper {
 
@@ -13,8 +17,10 @@ public class FilmHelper2 extends DriverBasedHelper implements FilmHelper {
 
   @Override
   public void create(Film film) {
-    // TODO Auto-generated method stub
-
+      AddMovieFormPage addMovieFormPage = pages.internalPage.ensurePageLoaded().clickAddMovieButton();
+        addMovieFormPage.ensurePageLoaded().setTitleNameInput(film.getTitle());
+        pages.addMovieFormPage.setYearInput(film.getYear());
+        pages.addMovieFormPage.clickSubmitButton();
   }
 
   @Override
@@ -29,4 +35,18 @@ public class FilmHelper2 extends DriverBasedHelper implements FilmHelper {
     return null;
   }
 
+  @Override
+  public boolean isFilmAdded(Film film) {
+      driver.findElement(By.linkText("Home")).click();
+        wait.until(ExpectedConditions.
+            presenceOfAllElementsLocatedBy(
+                    By.xpath("//div[@class='title']")));
+      try{
+          driver.findElement(By.xpath("//div[contains(text(),'"+film.getTitle()+"')]"));
+      }
+      catch (Exception e){
+          return false;
+      }
+      return true;
+  }
 }

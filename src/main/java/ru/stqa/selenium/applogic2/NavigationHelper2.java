@@ -39,8 +39,4 @@ public class NavigationHelper2 extends DriverBasedHelper implements NavigationHe
     //openRelativeUrl("?go=users");
   }
 
-  public void gotoAddFilmForm(){
-
-  }
-
 }

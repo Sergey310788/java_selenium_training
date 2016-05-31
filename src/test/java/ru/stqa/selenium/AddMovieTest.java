@@ -17,7 +17,7 @@ import static org.testng.Assert.assertTrue;
 public class AddMovieTest extends TestBase{
 
   @BeforeMethod
-  public static void mayBeLogIn(ApplicationManager2 app){
+  public void mayBeLogIn(ApplicationManager2 app){
     if (app.getUserHelper().isNotLoggedIn()) {
       User user = new User().setLogin("admin").setPassword("admin");
       app.getUserHelper().loginAs(user);
@@ -26,49 +26,21 @@ public class AddMovieTest extends TestBase{
 
   @Test
     public void testAddFilmPositive() throws Exception {
-    app.getNavigationHelper().gotoAddFilmForm();
+    User user = new User().setLogin("admin").setPassword("admin");
+    app.getUserHelper().loginAs(user);
     Film revenant = new Film().setTitle("Выживший").setYear("2015");
     app.getFilmHelper().create(revenant);
     assertTrue(app.getFilmHelper().isFilmAdded(revenant));
-
-
-
-    //add movie
-//    String movieTitle = "Выживший";
-//    String movieYear = "2015";
-//    List<WebElement> moviesBefore = null;
-//    List<WebElement> moviesAfter = null;
-//    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-//    WebDriverWait wait = new WebDriverWait(driver,30);
-//    wait.until(ExpectedConditions. //wait for home page to load
-//            presenceOfAllElementsLocatedBy(
-//                  By.xpath("//div[@class='title']")));
-//    moviesBefore = driver.findElements(By.xpath("//div[@class='title']"));
-//    driver.findElement(By.cssSelector("img[alt=\"Add movie\"]")).click();
-//    driver.findElement(By.name("name")).clear();
-//    driver.findElement(By.name("name")).sendKeys(movieTitle);
-//    driver.findElement(By.name("year")).clear();
-//    driver.findElement(By.name("year")).sendKeys(movieYear);
-//    driver.findElement(By.id("submit")).click();
-//    driver.findElement(By.linkText("Home")).click();
-//
-//    //check movies counter
-//    wait.until(ExpectedConditions. //wait for home page to load
-//            presenceOfAllElementsLocatedBy(
-//                    By.xpath("//div[@class='title']")));
-//    moviesAfter = driver.findElements(By.xpath("//div[@class='title']"));
-//    if (moviesAfter.size() != moviesBefore.size()+1)
-//      throw new Error("Фильм не добавлен");
   }
-  @Test
-  public void testAddMovieNegative() throws Exception {
-    app.getNavigationHelper().gotoAddFilmForm();
-    Film noYearFilm = new Film().setTitle("Невыживший");
-    app.getFilmHelper().create(noYearFilm);
-    assertTrue(app.getFilmHelper().isFilmNotAdded());
-    Film noTitleFilm = new Film().setYear("2015");
-    app.getFilmHelper().create(noTitleFilm);
-    assertTrue(app.getFilmHelper().isFilmNotAdded());
+
+//  @Test
+//  public void testAddMovieNegative() throws Exception {
+//    Film noYearFilm = new Film().setTitle("Невыживший");
+//    app.getFilmHelper().create(noYearFilm);
+//    assertTrue(app.getFilmHelper().isFilmNotAdded());
+//    Film noTitleFilm = new Film().setYear("2015");
+//    app.getFilmHelper().create(noTitleFilm);
+//    assertTrue(app.getFilmHelper().isFilmNotAdded());
 
 
 
@@ -116,7 +88,7 @@ public class AddMovieTest extends TestBase{
 //    moviesAfter = driver.findElements(By.xpath("//div[@class='title']"));
 //    if (moviesAfter.size() > moviesBefore.size())
 //      throw new Error("Ошибочное добавление фильма");
-  }
+
   public static void addMovie(WebDriver driver) throws Exception {
     //add movie
     List<WebElement> moviesBefore = null;

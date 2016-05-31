@@ -12,15 +12,4 @@ public interface FilmHelper {
 
 	boolean isFilmAdded(Film film);
 
-	boolean isFilmNotAdded();
-
-	boolean noFilmsAdded();
-
-	boolean isFilmFinded();
-
-	boolean isFilmNotFinded();
-
-	String findFilmTitle();
-
-	boolean isFilmDeleted();
 }

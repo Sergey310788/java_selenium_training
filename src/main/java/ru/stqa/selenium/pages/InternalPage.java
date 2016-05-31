@@ -26,6 +26,9 @@ public class InternalPage extends AnyPage {
 
   @FindBy(css = "nav a[onclick $= '?logout']")
   private WebElement logoutLink;
+
+  @FindBy(xpath = "//a[@href='./?go=add']")
+  private WebElement addMovieButton;
   
   public UserProfilePage clickUserProfilePage() {
     userProfileLink.click();
@@ -41,5 +44,10 @@ public class InternalPage extends AnyPage {
     logoutLink.click();
     wait.until(alertIsPresent()).accept();
     return pages.loginPage;
+  }
+
+  public AddMovieFormPage clickAddMovieButton() {
+    addMovieButton.click();
+    return pages.addMovieFormPage;
   }
 }

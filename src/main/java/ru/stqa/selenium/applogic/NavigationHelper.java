@@ -9,9 +9,4 @@ public interface NavigationHelper {
   void gotoUserProfilePage();
   void gotoUserManagementPage();
 
-  void gotoAddFilmForm();
-
-  boolean isNotHomePage();
-
-  void gotoFilmPage(Film film);
 }

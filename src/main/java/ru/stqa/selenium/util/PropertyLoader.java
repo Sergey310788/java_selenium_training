@@ -1,5 +1,7 @@
 package ru.stqa.selenium.util;
 
+import org.openqa.selenium.Capabilities;
+
 import java.io.IOException;
 import java.util.Properties;
 
@@ -28,6 +30,7 @@ public class PropertyLoader {
 		return value;
 	}
 
-	public static void loadCapabilities() {
+	public static Capabilities loadCapabilities() {
+		return null;
 	}
 }

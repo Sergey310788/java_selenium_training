@@ -10,7 +10,7 @@ import ru.stqa.selenium.applogic2.ApplicationManager2;
 
 public class TestBase {
 
-  protected ApplicationManager2 app;
+  protected ApplicationManager app;
 
 	@BeforeClass
 	public void init() {

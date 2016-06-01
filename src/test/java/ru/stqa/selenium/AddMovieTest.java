@@ -83,30 +83,4 @@ public class AddMovieTest extends TestNgTestBase{
     if (moviesAfter.size() > moviesBefore.size())
       throw new Error("Ошибочное добавление фильма");
   }
-  public static void addMovie(WebDriver driver) throws Exception {
-    //add movie
-    List<WebElement> moviesBefore = null;
-    List<WebElement> moviesAfter = null;
-    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-    WebDriverWait wait = new WebDriverWait(driver,30);
-    wait.until(ExpectedConditions. //wait for home page to load
-            presenceOfAllElementsLocatedBy(
-            By.xpath("//div[@class='title']")));
-    moviesBefore = driver.findElements(By.xpath("//div[@class='title']"));
-    driver.findElement(By.cssSelector("img[alt=\"Add movie\"]")).click();
-    driver.findElement(By.name("name")).clear();
-    driver.findElement(By.name("name")).sendKeys("Начало");
-    driver.findElement(By.name("year")).clear();
-    driver.findElement(By.name("year")).sendKeys("2010");
-    driver.findElement(By.id("submit")).click();
-    driver.findElement(By.linkText("Home")).click();
-
-    //check movies counter
-    wait.until(ExpectedConditions. //wait for home page to load
-            presenceOfAllElementsLocatedBy(
-            By.xpath("//div[@class='title']")));
-    moviesAfter = driver.findElements(By.xpath("//div[@class='title']"));
-    if (moviesAfter.size() != moviesBefore.size()+1)
-      throw new Error("Фильм не добавлен");
-  }
 }

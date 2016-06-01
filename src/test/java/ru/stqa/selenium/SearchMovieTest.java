@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -15,7 +16,10 @@ import java.util.concurrent.TimeUnit;
 import static org.testng.Assert.assertTrue;
 
 public class SearchMovieTest extends TestNgTestBase{
+@BeforeClass
+public void prepareSearchTest(){
 
+}
   @Test
     public void testSearchMoviePositive() throws Exception {
     //search movie
@@ -26,7 +30,7 @@ public class SearchMovieTest extends TestNgTestBase{
     driver.findElement(By.xpath("//input[@id='q']")).sendKeys("Начало" + Keys.RETURN);
     try{
       wait.until(ExpectedConditions.visibilityOfElementLocated(
-              By.xpath("//div[contains(text(),'Начало')]")));
+              By.xpath("//div[@class='title']")));
     }
     catch(Exception e){
       throw new Error("Ошибка поиска фильма");

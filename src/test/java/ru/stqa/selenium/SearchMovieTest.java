@@ -12,19 +12,29 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static org.testng.Assert.assertTrue;
+
 public class SearchMovieTest extends TestNgTestBase{
 
   @Test
     public void testSearchMoviePositive() throws Exception {
-    //add movie
-    AddMovieTest.addMovie(driver);
-
     //search movie
+    List<WebElement> foundMovies = null;
+    List<WebElement> allMovies = null;
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-    WebDriverWait wait = new WebDriverWait(driver, 30);
+    WebDriverWait wait = new WebDriverWait(driver, 10);
     driver.findElement(By.xpath("//input[@id='q']")).sendKeys("Начало" + Keys.RETURN);
-    wait.until(ExpectedConditions.visibilityOfElementLocated(
-            By.xpath("//div[contains(text(),'Начало')]")));
+    try{
+      wait.until(ExpectedConditions.visibilityOfElementLocated(
+              By.xpath("//div[contains(text(),'Начало')]")));
+    }
+    catch(Exception e){
+      throw new Error("Ошибка поиска фильма");
+    }
+    foundMovies = driver.findElements(By.xpath("//div[contains(text(),'Начало')]"));
+    allMovies = driver.findElements(By.xpath("//div[@class='title']"));
+    if (foundMovies.size() != allMovies.size())
+      throw new Error("Поиск работает неправильно");
   }
   @Test
   public void testSearchMovieNegative() throws Exception {

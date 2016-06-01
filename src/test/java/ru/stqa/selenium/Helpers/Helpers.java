@@ -40,12 +40,17 @@ public class Helpers extends TestNgTestBase {
         if (moviesAfter.size() != moviesBefore.size()+1)
             throw new Error("Фильм не добавлен");
     }
-    public static void testLogin(WebDriver driver) throws Exception {
-        driver.get(baseUrl + "/php4dvd/");
-        driver.findElement(By.id("username")).clear();
-        driver.findElement(By.id("username")).sendKeys("admin");
-        driver.findElement(By.name("password")).clear();
-        driver.findElement(By.name("password")).sendKeys("admin");
-        driver.findElement(By.name("submit")).click();
+    public static void mayBeLogin(WebDriver driver) throws Exception {
+        try {
+            driver.findElement(By.xpath("//nav"));
+        } catch (Exception e) {
+            driver.get(baseUrl + "/php4dvd/");
+            driver.findElement(By.id("username")).clear();
+            driver.findElement(By.id("username")).sendKeys("admin");
+            driver.findElement(By.name("password")).clear();
+            driver.findElement(By.name("password")).sendKeys("admin");
+            driver.findElement(By.name("submit")).click();
+        }
+    }
 
 }

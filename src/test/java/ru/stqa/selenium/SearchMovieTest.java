@@ -1,23 +1,12 @@
 package ru.stqa.selenium;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.selenium.applogic2.ApplicationManager2;
-import ru.stqa.selenium.model.Film;
-import ru.stqa.selenium.model.User;
-import ru.stqa.selenium.pages.TestBase;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import static org.testng.Assert.assertTrue;
 
 public class SearchMovieTest extends TestNgTestBase {
 

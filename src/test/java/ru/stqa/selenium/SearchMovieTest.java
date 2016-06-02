@@ -1,52 +1,64 @@
 package ru.stqa.selenium;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.selenium.Helpers.Helpers;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static org.testng.Assert.assertTrue;
+public class SearchMovieTest extends TestNgTestBase {
 
-public class SearchMovieTest extends TestNgTestBase{
+//  @BeforeMethod
+//
+//  public static void mayBeLoginAndFilmPresent(ApplicationManager2 app){
+//    AddMovieTest.mayBeLogIn(app);
+//    if (app.getNavigationHelper().isNotHomePage()){
+//      app.getNavigationHelper().openMainPage();
+//    }
+//    if (app.getFilmHelper().noFilmsAdded()){
+//      app.getNavigationHelper().gotoAddFilmForm();
+//      Film movie = new Film().setTitle("Начало").setYear("2010");
+//      app.getFilmHelper().create(movie);
+//      assertTrue(app.getFilmHelper().isFilmAdded(movie));
+//    }
+//  }
+
 
   @Test
     public void testSearchMoviePositive() throws Exception {
-    //search movie
-    List<WebElement> foundMovies = null;
-    List<WebElement> allMovies = null;
-    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-    WebDriverWait wait = new WebDriverWait(driver, 5);
-    driver.findElement(By.xpath("//input[@id='q']")).clear();
-    driver.findElement(By.xpath("//input[@id='q']")).sendKeys("Начало" + Keys.RETURN);
-    try{
-      wait.until(ExpectedConditions.visibilityOfElementLocated(
-              By.xpath("//div[@class='title']")));
-    }
-    catch(Exception e){
-      throw new Error("Ошибка поиска фильма");
-    }
-    foundMovies = driver.findElements(By.xpath("//div[contains(text(),'Начало')]"));
-    allMovies = driver.findElements(By.xpath("//div[@class='title']"));
-    if (foundMovies.size() != allMovies.size())
-      throw new Error("Поиск работает неправильно");
-  }
-  @Test
-  public void testSearchMovieNegative() throws Exception {
+//      app.getFilmHelper().search("Начало");
+//      assertTrue(app.getFilmHelper().isFilmFinded());
+
+
+
+
+
+    //add movie
+    AddMovieTest.addMovie(driver);
+
     //search movie
     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     WebDriverWait wait = new WebDriverWait(driver, 30);
-    Helpers.mayBeLogin(driver);
-    Helpers.addMovie(driver);
+    driver.findElement(By.xpath("//input[@id='q']")).sendKeys("Начало" + Keys.RETURN);
+    wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//div[contains(text(),'Начало')]")));
+  }
+  @Test
+    public void testSearchMovieNegative() throws Exception {
+//      app.getFilmHelper().search("Тест");
+//      assertTrue(app.getFilmHelper().isFilmNotFinded());
+
+
+
+
+    //login
+    LoginTest.testLogin(driver);
+
+    //search movie
+    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    WebDriverWait wait = new WebDriverWait(driver, 30);
     wait.until(ExpectedConditions.visibilityOfElementLocated(
             By.xpath("//input[@id='q']")));
     driver.findElement(By.xpath("//input[@id='q']")).clear();
